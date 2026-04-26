@@ -100,3 +100,23 @@ Configured under `train` and `train.physics_loss`:
 - `val_psnr`
 - `val_ssim`
 - `val_frc_score`
+
+## Results and Sample Images
+
+
+<div align="center">
+
+<table>
+  <tr>
+    <td><img src="Images/video05_inputrgb.png" width="400" /></td>
+    <td><img src="Images/video05_inputgray.png" width="400" /></td>
+  </tr>
+  <tr>
+    <td><img src="Images/video05_speckle.png" width="400" /></td>
+    <td><img src="Images/video05_swinU.png" width="400" /></td>
+  </tr>
+</table>
+
+<p><em>Figure: Comparison of input RGB, grayscale, speckle noise, and SwinU processed outputs.</em></p>
+
+</div>

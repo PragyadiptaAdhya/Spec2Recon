@@ -1,0 +1,65 @@
+experiment_name: restore_physics_swinunet_denoiser
+seed: 42
+device: cuda
+output_dir: outputs_restorephysics
+
+runtime:
+  device: cuda:0
+  amp: true
+  cudnn_benchmark: true
+  allow_tf32: true
+
+data:
+  train_dir: /data/padhya/cholec/cholec80/data_high_distortion/train
+  val_dir: /data/padhya/cholec/cholec80/data_high_distortion/val
+  image_size: 256
+  channels: 1
+  equalize_speckle: true
+  batch_size: 32
+  num_workers: 8
+  persistent_workers: true
+
+model:
+  embed_dim: 64
+  depths: [2, 2, 2, 2]
+  num_heads: [2, 4, 8, 16]
+  window_size: 8
+  mlp_ratio: 4.0
+  drop_rate: 0.0
+  attn_drop_rate: 0.0
+
+train:
+  epochs: 40
+  lr: 0.0002
+  betas: [0.9, 0.99]
+  weight_decay: 0.0001
+  grad_clip_norm: 1.0
+  save_every: 5
+
+  lambda_charbonnier: 1.0
+  lambda_grad: 0.25
+  lambda_frc: 0.5
+  lambda_smooth: 0.03
+  lambda_log_noise_mean: 0.05
+  lambda_log_noise_tv: 0.03
+  lambda_gamma_nll: 0.05
+  lambda_enl: 0.03
+
+  physics_loss:
+    eps: 0.001
+    frc_rings: 32
+    gamma_looks: 1.0
+    gamma_scales: [1, 2, 4]
+    expected_enl: 1.0
+    enl_patch_size: 7
+    enl_homogeneity_cv_max: 0.12
+    use_weighted_frc: true
+    frc_low_freq_weight: 1.0
+    frc_high_freq_weight: 1.25
+
+  stability:
+    use_ema: true
+    ema_decay: 0.999
+    grad_accum_steps: 2
+    warmup_steps: 250
+    min_lr_ratio: 0.05

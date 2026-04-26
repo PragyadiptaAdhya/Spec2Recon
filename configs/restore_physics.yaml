@@ -10,8 +10,8 @@ runtime:
   allow_tf32: true
 
 data:
-  train_dir: /data/padhya/cholec/cholec80/data_high_distortion/train
-  val_dir: /data/padhya/cholec/cholec80/data_high_distortion/val
+  train_dir: "train_dir_placeholder"  # Placeholder, replace with actual path
+  val_dir: "val_dir_placeholder"      # Placeholder, replace with actual path
   image_size: 256
   channels: 1
   equalize_speckle: true
